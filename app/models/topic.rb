@@ -87,7 +87,6 @@ protected
 
   def set_post_forum_id
     return unless @old_forum_id
-    # posts.update_all :forum_id => forum_id
     Post.update_all("forum_id = #{forum_id}", ['topic_id = ?', id])
     Forum.update_all "posts_count = posts_count - #{posts_count}", ['id = ?', @old_forum_id]
     Forum.update_all "posts_count = posts_count + #{posts_count}", ['id = ?', forum_id]
