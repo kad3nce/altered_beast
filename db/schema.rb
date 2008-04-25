@@ -23,8 +23,8 @@ ActiveRecord::Schema.define(:version => 1) do
     t.string  "permalink"
   end
 
-  add_index "forums", ["position", "site_id"], :name => "index_forums_on_position_and_site_id"
   add_index "forums", ["site_id", "permalink"], :name => "index_forums_on_site_id_and_permalink"
+  add_index "forums", ["position", "site_id"], :name => "index_forums_on_position_and_site_id"
 
   create_table "moderatorships", :force => true do |t|
     t.integer  "forum_id"
@@ -52,9 +52,9 @@ ActiveRecord::Schema.define(:version => 1) do
     t.integer  "site_id"
   end
 
-  add_index "posts", ["created_at", "forum_id"], :name => "index_posts_on_forum_id"
-  add_index "posts", ["created_at", "user_id"], :name => "index_posts_on_user_id"
   add_index "posts", ["created_at", "topic_id"], :name => "index_posts_on_topic_id"
+  add_index "posts", ["created_at", "user_id"], :name => "index_posts_on_user_id"
+  add_index "posts", ["created_at", "forum_id"], :name => "index_posts_on_forum_id"
 
   create_table "sites", :force => true do |t|
     t.string   "name"
@@ -83,9 +83,9 @@ ActiveRecord::Schema.define(:version => 1) do
     t.string   "permalink"
   end
 
-  add_index "topics", ["sticky", "last_updated_at", "forum_id"], :name => "index_topics_on_sticky_and_last_updated_at"
-  add_index "topics", ["last_updated_at", "forum_id"], :name => "index_topics_on_forum_id_and_last_updated_at"
   add_index "topics", ["forum_id", "permalink"], :name => "index_topics_on_forum_id_and_permalink"
+  add_index "topics", ["last_updated_at", "forum_id"], :name => "index_topics_on_forum_id_and_last_updated_at"
+  add_index "topics", ["sticky", "last_updated_at", "forum_id"], :name => "index_topics_on_sticky_and_last_updated_at"
 
   create_table "users", :force => true do |t|
     t.string   "login"
@@ -113,8 +113,8 @@ ActiveRecord::Schema.define(:version => 1) do
     t.string   "permalink"
   end
 
-  add_index "users", ["last_seen_at"], :name => "index_users_on_last_seen_at"
-  add_index "users", ["site_id", "posts_count"], :name => "index_site_users_on_posts_count"
   add_index "users", ["site_id", "permalink"], :name => "index_site_users_on_permalink"
+  add_index "users", ["site_id", "posts_count"], :name => "index_site_users_on_posts_count"
+  add_index "users", ["last_seen_at"], :name => "index_users_on_last_seen_at"
 
 end
